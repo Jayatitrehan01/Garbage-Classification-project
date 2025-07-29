@@ -5,12 +5,14 @@ import streamlit as st
 from PIL import Image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
+import gdown
+
 
 
 # Config
 IMG_SIZE = 128
 MODEL_PATH = "trashvision_model.h5"
-MODEL_ID ="https://drive.google.com/file/d/1452Y6JhVDNQjMKm0DIzHbh4EX4a3Lu8N/view?usp=sharing"
+MODEL_ID ="1452Y6JhVDNQjMKm0DIzHbh4EX4a3Lu8N"
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CLASS_NAMES = sorted(os.listdir(os.path.join(SCRIPT_DIR, "dataset")))
 
