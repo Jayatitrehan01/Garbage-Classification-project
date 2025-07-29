@@ -1,3 +1,4 @@
+# importing libraries
 import os
 import numpy as np
 import streamlit as st
@@ -5,26 +6,27 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 
-# -----------------------------
+
 # Config
-# -----------------------------
 IMG_SIZE = 128
 MODEL_PATH = "trashvision_model.h5"
+MODEL_ID ="https://drive.google.com/file/d/1452Y6JhVDNQjMKm0DIzHbh4EX4a3Lu8N/view?usp=sharing"
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CLASS_NAMES = sorted(os.listdir(os.path.join(SCRIPT_DIR, "dataset")))
 
-# -----------------------------
+# Download the model if not already present
+if not os.path.exists(MODEL_PATH):
+    url = f"https://drive.google.com/uc?id={MODEL_ID}"
+    gdown.download(url, MODEL_PATH, quiet=False)
+
 # Load model
-# -----------------------------
 @st.cache_resource
 def load_trash_model():
     return load_model(MODEL_PATH)
 
 model = load_trash_model()
 
-# -----------------------------
 # Streamlit UI
-# -----------------------------
 st.title("🗑️ Garbage Classifier - TrashVision")
 st.write("Upload an image to classify it into one of the garbage categories.")
 
